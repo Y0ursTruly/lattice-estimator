@@ -4,7 +4,8 @@ from estimator import LWE, schemes #schemes are in estimator/schemes.py
 from math import log2
 
 N = 32768
-q = (1<<60)*(1<<60) #approximate product of [60,60] primes
+q = 1329227995775244468652735166391779329 #a sample product of 2 [60,60] primes
+#these primes were: [1152921504598720513, 1152921504606584833]
 
 Xs = UniformMod(3)
 Xe = DiscreteGaussian(stddev=3.19) #SEAL default sigma is 3.19
