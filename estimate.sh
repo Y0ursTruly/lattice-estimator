@@ -54,8 +54,7 @@ echo "Running pip3 install..."
 pip3 install --quiet --no-input -r requirements.txt
 echo "Finished running pip3 install"
 
-# random lines that needs to run inside a script but not needed in a live shell
-source ~/.bashrc
+# random line that needs to run inside a script but not needed in a live shell
 eval "$(conda shell.bash hook)"
 
 
