@@ -70,5 +70,7 @@ echo "Finished running pip3 install"
 
 # the meat of the matter
 clear
+eval "$(conda shell.bash hook)"
+conda activate sage-env
 # now to run the line below on a machine that doesn't terminate the process due to lack of RAM
 sage -python3 estimate.py
