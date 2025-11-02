@@ -3,7 +3,7 @@ from estimator.nd import UniformMod, DiscreteGaussian
 from estimator import LWE, schemes #schemes are in estimator/schemes.py
 from math import log2
 
-N = 32768/2
+N = int(32768/2)
 q = 1329227995775244468652735166391779329 #a sample product of 2 [60,60] primes
 #these primes were: [1152921504598720513, 1152921504606584833]
 
@@ -14,7 +14,7 @@ Xe = DiscreteGaussian(stddev=3.19) #SEAL default sigma is 3.19
 
 my_config = LWEParameters(n=N, q=q, Xs=Xs, Xe=Xe)
 print("Running Estimator...")
-est = LWE.estimate(my_config) # I need to find a machine with enough RAM that this doesn't get terminated
+est = LWE.estimate.rough(my_config) # I need to find a machine with enough RAM that this doesn't get terminated
 #est = LWE.estimate(schemes.Kyber512) # example that doesn't get terminated on github codespaces
 best = min(est.values(), key=lambda x: x['rop'])
 print("===========================")
