@@ -6,10 +6,16 @@ from math import log2
 #N = int(32768/2)
 #q = 1329227995775244468652735166391779329 #a sample product of 2 [60,60] primes
 #these primes were: [1152921504598720513, 1152921504606584833]
+#532 bit security
 
 N = int(32768/4)
-q = 576460752302473217
+q = 576460752302473217 #59 bit prime
 #yes, 1152921504606584833, the 60 bit prime makes the construction weaker than the 59 bit one
+#536 bit security
+
+#N = int(32768/8)
+#q = 1099511480321 #40 bit prime
+#352 bit security
 
 Xs = UniformMod(3)
 Xe = DiscreteGaussian(stddev=3.19) #SEAL default sigma is 3.19
