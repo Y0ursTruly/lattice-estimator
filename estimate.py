@@ -17,9 +17,9 @@ N = int(32768/8)
 q = 1099511480321 #40 bit prime
 #352 bit security
 
-#N = int(2048)
-#q = 1134176769 #27 bit prime
-#210 bit security
+N = int(2048)
+q = 268369921 #28 bit prime
+#229 bit security
 
 Xs = UniformMod(3)
 Xe = DiscreteGaussian(stddev=3.19) #SEAL default sigma is 3.19
