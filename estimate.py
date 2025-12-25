@@ -13,8 +13,8 @@ from math import log2
 #yes, 1152921504606584833, the 60 bit prime makes the construction weaker than the 59 bit one
 #536 bit security
 
-N = int(32768/8)
-q = 1099511480321 #40 bit prime
+#N = int(32768/8)
+#q = 1099511480321 #40 bit prime
 #352 bit security
 
 N = int(2048)
