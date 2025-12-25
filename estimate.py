@@ -19,7 +19,7 @@ q = 1099511480321 #40 bit prime
 
 N = int(2048)
 q = 268369921 #28 bit prime
-#229 bit security
+#rough 229, but full estimate 251 bit security
 
 Xs = UniformMod(3)
 Xe = DiscreteGaussian(stddev=3.19) #SEAL default sigma is 3.19
@@ -28,7 +28,7 @@ Xe = DiscreteGaussian(stddev=3.19) #SEAL default sigma is 3.19
 
 my_config = LWEParameters(n=N, q=q, Xs=Xs, Xe=Xe)
 print("Running Estimator...")
-est = LWE.estimate.rough(my_config) # 512 bit secure configuration currently
+est = LWE.estimate(my_config) #251 bit security
 #est = LWE.estimate(schemes.Kyber512) # normal configuration example (used to test that this code works properly)
 best = min(est.values(), key=lambda x: x['rop'])
 print("===========================")
