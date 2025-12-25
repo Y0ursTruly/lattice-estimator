@@ -15,7 +15,7 @@ from math import log2
 
 #N = int(32768/8)
 #q = 1099511480321 #40 bit prime
-#352 bit security
+#352 rough, but full estimate 371 bit security
 
 N = int(2048)
 q = 268369921 #28 bit prime
