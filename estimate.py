@@ -15,7 +15,7 @@ Xe = DiscreteGaussian(stddev=3.19) #SEAL default sigma is 3.19
 my_config = LWEParameters(n=N, q=q, Xs=Xs, Xe=Xe)
 print("Running Estimator...")
 est = LWE.estimate(my_config) #251 bit security
-#est = LWE.estimate(schemes.Kyber512) # normal configuration example (used to test that this code works properly)
+#est = LWE.estimate(schemes.Kyber1024) # normal configuration example (used to test that this code works properly)
 best = min(est.values(), key=lambda x: x['rop'])
 print("===========================")
 print(best)
