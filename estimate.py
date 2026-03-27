@@ -13,12 +13,12 @@ Xe = DiscreteGaussian(stddev=3.19) #SEAL default sigma is 3.19
 #according to https://www.microsoft.com/en-us/research/wp-content/uploads/2017/06/sealmanual_v2.2.pdf
 #and previously: https://www.microsoft.com/en-us/research/wp-content/uploads/2016/09/sealmanual.pdf
 
-my_config = LWEParameters(n=N, q=q, Xs=Xs, Xe=Xe)
+bfv_scheme = LWEParameters(n=N, q=q, Xs=Xs, Xe=Xe)
 print("Running Estimator...")
-est = LWE.estimate(my_config, red_cost_model=ADPS16(mode="quantum"))
-#est = LWE.estimate(schemes.Kyber1024, red_cost_model=ADPS16(mode="quantum")) # normal configuration example (used to test that this code works properly)
-best = min(est.values(), key=lambda x: x['rop'])
+bfv_estimate = LWE.estimate(bfv_scheme, red_cost_model=ADPS16(mode="quantum"))
+kyber_estimate = LWE.estimate(schemes.Kyber1024, red_cost_model=ADPS16(mode="quantum"))
+best_bfv = min(bfv_estimate.values(), key=lambda x: x['rop'])
+best_kyber = min(kyber_estimate.values(), key=lambda x: x['rop'])
 print("===========================")
-print(best)
-print("===========================")
-print("Bits Security:", log2(best['rop']))
+print("BFV Security Estimate:", log2(best_bfv['rop']))
+print("Kyber Security Estimate:", log2(best_kyber['rop']))

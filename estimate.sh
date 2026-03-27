@@ -42,7 +42,7 @@ elif ! command -v conda >/dev/null 2>&1; then
     conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
     conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
     echo "Finished installing conda"
-   conda config --add channels conda-forge || true
+    conda config --add channels conda-forge || true
     conda config --add channels defaults || true
     conda config --set channel_priority flexible || true
     echo "Configuring sagemath"
@@ -51,7 +51,7 @@ elif ! command -v conda >/dev/null 2>&1; then
     conda activate sage-env
     echo "Configuration of sagemath complete"
 
-elif command -v conda >/dev/null 2>&1; then
+elif [ ! -f "sage-configured.txt" ] command -v conda >/dev/null 2>&1; then
     echo "Installing sagemath via conda"
     conda config --add channels conda-forge || true
     conda config --add channels defaults || true
@@ -67,10 +67,12 @@ fi
 echo "Running pip3 install..."
 pip3 install --quiet --no-input -r requirements.txt
 echo "Finished running pip3 install"
+if [ ! -f "sage-configured.txt" ] then;
+    touch "sage-configured.txt"
+fi
 
 # the meat of the matter
 clear
 eval "$(conda shell.bash hook)"
 conda activate sage-env
-# now to run the line below on a machine that doesn't terminate the process due to lack of RAM
 sage -python3 estimate.py
