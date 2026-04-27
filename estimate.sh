@@ -75,4 +75,4 @@ echo "Finished running pip3 install"
 clear
 eval "$(conda shell.bash hook)"
 conda activate sage-env
-sage -python3 estimate.py
+python3 estimate.py
