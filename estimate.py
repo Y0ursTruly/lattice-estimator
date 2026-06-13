@@ -14,12 +14,16 @@ from estimator.reduction import RC, ADPS16
 # this was for microsoft SEAL BFV stuff of a standard deviation 3.19 for Xe and UniformMod(3)
 # but we're moving on from SEAL onto a module-lwe configuration for speed
 
+#N = 1024
+#q = 8191
 N = 1024
-q = 8191
+q = 768773 #considering room for computational noise flooding of standard deviation 1000x encryption's standard deviation
 
-Xs = DiscreteGaussian(stddev=3.937) #KYBER_ETA1=31 in params.h
-Xe = DiscreteGaussian(stddev=3.937) #KYBER_ETA2=31 in params.h
+#Xs = DiscreteGaussian(stddev=3.937) #KYBER_ETA1=31 in params.h
+#Xe = DiscreteGaussian(stddev=3.937) #KYBER_ETA2=31 in params.h
 # module learning with errors scheme intended to be adopted from the ind-cpa parts of Kyber1024
+Xs = DiscreteGaussian(stddev=1)
+Xe = DiscreteGaussian(stddev=1)
 
 
 my_mlwe_scheme = LWEParameters(n=N, q=q, Xs=Xs, Xe=Xe)
