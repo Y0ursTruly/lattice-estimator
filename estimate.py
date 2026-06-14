@@ -41,5 +41,5 @@ kyber_estimate = LWE.estimate(schemes.Kyber1024, red_cost_model=ADPS16(mode="qua
 best_my_mlwr = min(my_mlwr_estimate.values(), key=lambda x: x['rop'])
 best_kyber = min(kyber_estimate.values(), key=lambda x: x['rop'])
 print("===========================")
-print("My MLWE Security Estimate:", log2(best_my_mlwr['rop']))
+print("My MLWR Security Estimate:", log2(best_my_mlwr['rop']))
 print("Kyber Security Estimate:", log2(best_kyber['rop']))
