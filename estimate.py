@@ -16,22 +16,30 @@ from estimator.reduction import RC, ADPS16
 
 #N = 1024
 #q = 8191
-N = 1024
-q = 768773 #considering room for computational noise flooding of standard deviation 1000x encryption's standard deviation
+#N = 1024
+#q = 768773 #considering room for computational noise flooding of standard deviation 1000x encryption's standard deviation
 
 #Xs = DiscreteGaussian(stddev=3.937) #KYBER_ETA1=31 in params.h
 #Xe = DiscreteGaussian(stddev=3.937) #KYBER_ETA2=31 in params.h
 # module learning with errors scheme intended to be adopted from the ind-cpa parts of Kyber1024
-Xs = DiscreteGaussian(stddev=1)
-Xe = DiscreteGaussian(stddev=1)
+#Xs = DiscreteGaussian(stddev=1)
+#Xe = DiscreteGaussian(stddev=1)
 
 
-my_mlwe_scheme = LWEParameters(n=N, q=q, Xs=Xs, Xe=Xe)
+
+# LWR time (4 bit rounding for Xe then 14 bit rounding to be 2^5 times larger than encryption thus adaptive safety for 2^10 queries)
+N = 1024
+q = 2**22
+Xs = DiscreteGaussian(2.0) #UniformMod(q)
+Xe = DiscreteGaussian(4.6)
+
+
+my_mlwr_scheme = LWEParameters(n=N, q=q, Xs=Xs, Xe=Xe)
 print("Running Estimator...")
-my_mlwe_estimate = LWE.estimate(my_mlwe_scheme, red_cost_model=ADPS16(mode="quantum"))
+my_mlwr_estimate = LWE.estimate(my_mlwr_scheme, red_cost_model=ADPS16(mode="quantum"))
 kyber_estimate = LWE.estimate(schemes.Kyber1024, red_cost_model=ADPS16(mode="quantum"))
-best_my_mlwe = min(my_mlwe_estimate.values(), key=lambda x: x['rop'])
+best_my_mlwr = min(my_mlwr_estimate.values(), key=lambda x: x['rop'])
 best_kyber = min(kyber_estimate.values(), key=lambda x: x['rop'])
 print("===========================")
-print("My MLWE Security Estimate:", log2(best_my_mlwe['rop']))
+print("My MLWE Security Estimate:", log2(best_my_mlwr['rop']))
 print("Kyber Security Estimate:", log2(best_kyber['rop']))
