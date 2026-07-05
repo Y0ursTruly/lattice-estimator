@@ -28,8 +28,8 @@ from estimator.reduction import RC, ADPS16
 
 
 # LWR time (4 bit rounding for Xe then 14 bit rounding to be 2^5 times larger than encryption thus adaptive safety for 2^10 queries)
-N = 1024
-q = 2**22
+N = 1280 #1024
+q = 2**27 #2**22
 Xs = DiscreteGaussian(2.0) #UniformMod(q)
 Xe = DiscreteGaussian(4.6)
 
